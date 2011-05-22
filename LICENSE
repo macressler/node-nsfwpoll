@@ -1,3 +1,4 @@
+===
 Copyright (C) 2011 by Dan Dirks
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -17,3 +18,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+===
+
+This license applies to all parts of the Software that are not externally
+maintained libraries.
+
+The externally maintained libraries used by the Software are:
+
+ -  excanvas, located at public/js/excanvas.js. excanvas is copyright 
+    Google, Inc, and released under the Apache License, Version 2.0.
+ -  flot, located at public/js/jquery.flot.min.js. flot is copyright IOLA,
+    and released under the MIT license.

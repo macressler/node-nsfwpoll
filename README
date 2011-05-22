@@ -1,7 +1,6 @@
-This is a small app written to provide a poll similar to those on 
-political debates for a podcast I listen to, NSFWShow 
-(http://twit.tv/nsfw). It 
-was written using Node.JS and Redis.
+This is a small app written to provide a poll similar to those on political 
+debates for a podcast I listen to, NSFWShow (http://twit.tv/nsfw).
+It was written using Node.JS and Redis.
 
 I have included both a version written in Javascript, and a version that 
 was created using CoffeeScript. This was my first attempt at 
