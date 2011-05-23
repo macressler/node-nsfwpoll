@@ -68,7 +68,7 @@ app.get('/', function(req, res){
 app.post('/poll/vote', function(req, res) {
 	var sub = parseInt(req.param('subject', -1), 10),
 		vote = parseInt(req.param('vote', -1), 10),
-		now = parseInt(+(new Date)),
+		now = +new Date,
 		encoded_ip = utils.encodeIpAddress(req.connection.remoteAddress),
 		encoded_time = now.toString(36),
 		vote_limit_key = 'poll:vote_lim:' + encoded_ip;
@@ -105,7 +105,7 @@ app.post('/poll/vote', function(req, res) {
 
 //getting the current results
 app.get('/poll/results', function(req, res) {
-	var score_higher = parseInt(+(new Date)),
+	var score_higher = +new Date,
 		score_lower = score_higher - (decay_time * 1000),
 		multi_commands = [];
 
@@ -122,7 +122,7 @@ app.get('/poll/results', function(req, res) {
 			var neg = results[i * 2],
 				pos = results[i * 2 + 1],
 				total = pos + neg;
-			return_list.push(((total == 0) ? 0 : ((pos == 0) ? -10 : ((pos / total) * (vote_scale * 2)) - vote_scale)));
+			return_list.push(((total == 0) ? 0 : ((pos == 0) ? (-1 * vote_scale) : ((pos / total) * (vote_scale * 2)) - vote_scale)));
 		}
 		res.send(return_list);
 	});
@@ -130,7 +130,7 @@ app.get('/poll/results', function(req, res) {
 
 //this method is called on a timeout, and removes old data points that are no longer used in calculations
 function removeOldVotes() {
-	var score_higher = parseInt(+(new Date)) - (decay_time * 1000),
+	var score_higher = +new Date - (decay_time * 1000),
 		multi_commands = [];
 
 	valid_subjects.forEach(function(e, i) {

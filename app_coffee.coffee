@@ -6,7 +6,7 @@ express		= require 'express'
 redis 		= require 'redis'
 utils 		= require './lib/helpers'
 
-app = module.exports = express.createServer();
+app = module.exports = express.createServer()
 
 redis_client	= redis.createClient()
 
@@ -61,7 +61,7 @@ API Routes
 app.post '/poll/vote', (req, res) ->
 	sub 			= parseInt req.param('subject', -1), 10
 	vote 			= parseInt req.param('vote', -1), 10
-	now				= parseInt +new Date, 10
+	now				= +new Date
 	encoded_ip		= utils.encodeIpAddress req.connection.remoteAddress
 	encoded_time 	= now.toString 36
 	vote_limit_key	= "poll:vote_lim:#{ encoded_ip }"
@@ -95,7 +95,7 @@ app.post '/poll/vote', (req, res) ->
 
 #getting the current results
 app.get '/poll/results', (req, res) ->
-	score_higher	= parseInt +new Date
+	score_higher	= +new Date
 	score_lower		= score_higher - (decay_time * 1000)
 	multi_commands 	= []
 
@@ -110,12 +110,12 @@ app.get '/poll/results', (req, res) ->
 				neg = j
 				pos = results[i + 1]
 				total = pos + neg
-				return if !total then 0 else if !pos then -10 else (pos / total) * (vote_scale * 2) - vote_scale
+				return if !total then 0 else if !pos then -1 * vote_scale else (pos / total) * (vote_scale * 2) - vote_scale
 		)
 
 #this method is called on a timeout, and removes old data points that are no longer used in calculations
 removeOldVotes = ->
-	score_higher	= parseInt(+new Date, 10) - (decay_time * 1000)
+	score_higher	= +new Date - (decay_time * 1000)
 	multi_commands 	= []
 
 	for sub in valid_subjects
